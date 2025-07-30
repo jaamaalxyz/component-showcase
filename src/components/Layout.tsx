@@ -10,22 +10,13 @@ export function Layout() {
               Component Showcase
             </Link>
             <div className="flex gap-6">
-              <Link 
-                to="/" 
-                className="text-gray-600 hover:text-gray-900 transition-colors"
-              >
+              <Link to="/" className="text-gray-600 hover:text-gray-900 transition-colors">
                 Home
               </Link>
-              <Link 
-                to="/button" 
-                className="text-gray-600 hover:text-gray-900 transition-colors"
-              >
+              <Link to="/button" className="text-gray-600 hover:text-gray-900 transition-colors">
                 Button
               </Link>
-              <Link 
-                to="/accordion" 
-                className="text-gray-600 hover:text-gray-900 transition-colors"
-              >
+              <Link to="/accordion" className="text-gray-600 hover:text-gray-900 transition-colors">
                 Accordion
               </Link>
             </div>

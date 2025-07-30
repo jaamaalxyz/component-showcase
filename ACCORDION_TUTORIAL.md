@@ -190,12 +190,8 @@ interface AccordionContextType {
 }
 
 // Create the contexts - think of these as communication channels
-const AccordionContext = createContext<AccordionContextType | undefined>(
-  undefined
-);
-const AccordionItemContext = createContext<{ value: string } | undefined>(
-  undefined
-);
+const AccordionContext = createContext<AccordionContextType | undefined>(undefined);
+const AccordionItemContext = createContext<{ value: string } | undefined>(undefined);
 ```
 
 ### Step 3: Custom Hooks for Clean Component Logic
@@ -216,9 +212,7 @@ function useAccordion() {
 function useAccordionItem() {
   const context = useContext(AccordionItemContext);
   if (!context) {
-    throw new Error(
-      'AccordionTrigger and AccordionContent must be used within an AccordionItem'
-    );
+    throw new Error('AccordionTrigger and AccordionContent must be used within an AccordionItem');
   }
   return context;
 }
@@ -242,12 +236,7 @@ interface AccordionProps {
   className?: string;
 }
 
-export function Accordion({
-  children,
-  type = 'single',
-  defaultValue,
-  className,
-}: AccordionProps) {
+export function Accordion({ children, type = 'single', defaultValue, className }: AccordionProps) {
   // Initialize state based on defaultValue prop
   const [openItems, setOpenItems] = useState<Set<string>>(() => {
     if (!defaultValue) return new Set();
@@ -282,12 +271,7 @@ export function Accordion({
 
   return (
     <AccordionContext.Provider value={{ openItems, toggleItem, type }}>
-      <div
-        className={cn(
-          'divide-y divide-gray-200 border border-gray-200 rounded-lg',
-          className
-        )}
-      >
+      <div className={cn('divide-y divide-gray-200 border border-gray-200 rounded-lg', className)}>
         {children}
       </div>
     </AccordionContext.Provider>
@@ -322,21 +306,13 @@ interface AccordionItemProps {
   className?: string;
 }
 
-export function AccordionItem({
-  children,
-  value,
-  className,
-}: AccordionItemProps) {
+export function AccordionItem({ children, value, className }: AccordionItemProps) {
   const { openItems } = useAccordion();
   const isOpen = openItems.has(value);
 
   return (
     <AccordionItemContext.Provider value={{ value }}>
-      <div
-        className={cn('', className)}
-        data-value={value}
-        data-state={isOpen ? 'open' : 'closed'}
-      >
+      <div className={cn('', className)} data-value={value} data-state={isOpen ? 'open' : 'closed'}>
         {children}
       </div>
     </AccordionItemContext.Provider>
@@ -352,10 +328,7 @@ interface AccordionTriggerProps {
   className?: string;
 }
 
-export function AccordionTrigger({
-  children,
-  className,
-}: AccordionTriggerProps) {
+export function AccordionTrigger({ children, className }: AccordionTriggerProps) {
   const { toggleItem, openItems } = useAccordion();
   const { value } = useAccordionItem();
   const isOpen = openItems.has(value);
@@ -410,10 +383,7 @@ interface AccordionContentProps {
   className?: string;
 }
 
-export function AccordionContent({
-  children,
-  className,
-}: AccordionContentProps) {
+export function AccordionContent({ children, className }: AccordionContentProps) {
   const { openItems } = useAccordion();
   const { value } = useAccordionItem();
   const isOpen = openItems.has(value);
@@ -430,9 +400,7 @@ export function AccordionContent({
       data-state={isOpen ? 'open' : 'closed'}
     >
       <div className="overflow-hidden">
-        <div className={cn('px-6 pb-4 pt-0 text-sm text-gray-600', className)}>
-          {children}
-        </div>
+        <div className={cn('px-6 pb-4 pt-0 text-sm text-gray-600', className)}>{children}</div>
       </div>
     </div>
   );
@@ -475,9 +443,7 @@ function App() {
     description: '',
   });
 
-  const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -505,9 +471,7 @@ function App() {
 
             <form onSubmit={handleSave} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Name
-                </label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                 <input
                   type="text"
                   name="name"
@@ -521,10 +485,7 @@ function App() {
               {/* Email and Description fields... */}
 
               <div className="flex gap-3 pt-2">
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-blue-600 text-white rounded-md"
-                >
+                <button type="submit" className="px-4 py-2 bg-blue-600 text-white rounded-md">
                   Save
                 </button>
                 <button
@@ -603,10 +564,7 @@ Our component already includes many accessibility features, but let's ensure we'
 
 ```tsx
 // Enhanced AccordionTrigger with full a11y support
-export function AccordionTrigger({
-  children,
-  className,
-}: AccordionTriggerProps) {
+export function AccordionTrigger({ children, className }: AccordionTriggerProps) {
   const { toggleItem, openItems } = useAccordion();
   const { value } = useAccordionItem();
   const isOpen = openItems.has(value);
@@ -639,10 +597,7 @@ export function AccordionTrigger({
 }
 
 // Enhanced AccordionContent with ARIA relationships
-export function AccordionContent({
-  children,
-  className,
-}: AccordionContentProps) {
+export function AccordionContent({ children, className }: AccordionContentProps) {
   const { openItems } = useAccordion();
   const { value } = useAccordionItem();
   const isOpen = openItems.has(value);
@@ -740,8 +695,7 @@ type AnimationPreset = 'smooth' | 'bounce' | 'spring';
 const animationClasses = {
   smooth: 'transition-all duration-300 ease-in-out',
   bounce: 'transition-all duration-500 ease-out',
-  spring:
-    'transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]',
+  spring: 'transition-all duration-400 ease-[cubic-bezier(0.175,0.885,0.32,1.275)]',
 };
 ```
 
@@ -757,15 +711,9 @@ _As a technical content reviewer with extensive React experience, here are the k
 
 ```tsx
 // Add error boundary for graceful failures
-export function AccordionErrorBoundary({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export function AccordionErrorBoundary({ children }: { children: React.ReactNode }) {
   return (
-    <ErrorBoundary
-      fallback={<div>Something went wrong with the accordion.</div>}
-    >
+    <ErrorBoundary fallback={<div>Something went wrong with the accordion.</div>}>
       {children}
     </ErrorBoundary>
   );
@@ -776,11 +724,9 @@ export function AccordionErrorBoundary({
 
 ```tsx
 // Memoize expensive operations
-const AccordionTrigger = React.memo(
-  ({ children, className }: AccordionTriggerProps) => {
-    // Component logic...
-  }
-);
+const AccordionTrigger = React.memo(({ children, className }: AccordionTriggerProps) => {
+  // Component logic...
+});
 
 // Use useCallback for event handlers in the main Accordion
 const toggleItem = useCallback(
