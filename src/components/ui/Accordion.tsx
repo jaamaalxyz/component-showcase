@@ -34,21 +34,16 @@ interface AccordionProps {
   className?: string;
 }
 
-export function Accordion({ 
-  children, 
-  type = 'single', 
-  defaultValue,
-  className 
-}: AccordionProps) {
+export function Accordion({ children, type = 'single', defaultValue, className }: AccordionProps) {
   const [openItems, setOpenItems] = useState<Set<string>>(() => {
     if (!defaultValue) return new Set();
     return new Set(Array.isArray(defaultValue) ? defaultValue : [defaultValue]);
   });
 
   const toggleItem = (value: string) => {
-    setOpenItems(prev => {
+    setOpenItems((prev) => {
       const newSet = new Set(prev);
-      
+
       if (type === 'single') {
         if (newSet.has(value)) {
           newSet.clear();
@@ -63,7 +58,7 @@ export function Accordion({
           newSet.add(value);
         }
       }
-      
+
       return newSet;
     });
   };
@@ -117,7 +112,7 @@ export function AccordionTrigger({ children, className }: AccordionTriggerProps)
       data-state={isOpen ? 'open' : 'closed'}
     >
       <span className="text-sm font-medium text-gray-900">{children}</span>
-      <ChevronDown 
+      <ChevronDown
         className={cn(
           'h-4 w-4 text-gray-500 transition-transform duration-200',
           isOpen && 'rotate-180'
@@ -146,9 +141,7 @@ export function AccordionContent({ children, className }: AccordionContentProps)
       data-state={isOpen ? 'open' : 'closed'}
     >
       <div className="overflow-hidden">
-        <div className={cn('px-6 pb-4 pt-0 text-sm text-gray-600', className)}>
-          {children}
-        </div>
+        <div className={cn('px-6 pb-4 pt-0 text-sm text-gray-600', className)}>{children}</div>
       </div>
     </div>
   );
