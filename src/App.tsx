@@ -3,6 +3,7 @@ import { Layout } from './components/Layout';
 import { Home } from './pages/Home';
 import { ButtonPage } from './pages/ButtonPage';
 import { AccordionPage } from './pages/AccordionPage';
+import { ContextFormPage } from './pages/ContextFormPage';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="button" element={<ButtonPage />} />
         <Route path="accordion" element={<AccordionPage />} />
+        <Route path="context-form" element={<ContextFormPage />} />
       </Route>
     </Routes>
   );

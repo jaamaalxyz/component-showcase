@@ -13,11 +13,8 @@ export function Layout() {
               <Link to="/" className="text-gray-600 hover:text-gray-900 transition-colors">
                 Home
               </Link>
-              <Link to="/button" className="text-gray-600 hover:text-gray-900 transition-colors">
-                Button
-              </Link>
-              <Link to="/accordion" className="text-gray-600 hover:text-gray-900 transition-colors">
-                Accordion
+              <Link to="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
+                About
               </Link>
             </div>
           </div>

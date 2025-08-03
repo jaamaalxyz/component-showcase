@@ -38,6 +38,19 @@ export function Home() {
             View Accordion Examples →
           </Link>
         </div>
+        <div className="bg-white rounded-lg shadow-sm border p-6">
+          <h2 className="text-xl font-semibold mb-3">Context Form Component</h2>
+          <p className="text-gray-600 mb-4">
+            A versatile context form component with various input fields, validation, and submission
+            handling.
+          </p>
+          <Link
+            to="/context-form"
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
+          >
+            View Context Form Examples →
+          </Link>
+        </div>
       </div>
     </div>
   );
