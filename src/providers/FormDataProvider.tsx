@@ -5,6 +5,7 @@ type State = {
   name: string;
   country: Country;
   discount: number;
+  showSuccessModal: boolean;
 };
 
 type API = {
@@ -12,6 +13,10 @@ type API = {
   onCountryChange: (name: Country) => void;
   onDiscountChange: (price: number) => void;
   onSave: () => void;
+  onReset: () => void;
+  isFormValid: boolean;
+  showSuccessModal: boolean;
+  onCloseModal: () => void;
 };
 
 const FormNameContext = createContext<State['name']>({} as State['name']);
@@ -22,7 +27,10 @@ const FormAPIContext = createContext<API>({} as API);
 type Actions =
   | { type: 'updateName'; name: string }
   | { type: 'updateCountry'; country: Country }
-  | { type: 'updateDiscount'; discount: number };
+  | { type: 'updateDiscount'; discount: number }
+  | { type: 'showSuccessModal' }
+  | { type: 'closeModal' }
+  | { type: 'resetForm' };
 
 const reducer = (state: State, action: Actions): State => {
   switch (action.type) {
@@ -32,15 +40,53 @@ const reducer = (state: State, action: Actions): State => {
       return { ...state, discount: action.discount };
     case 'updateCountry':
       return { ...state, country: action.country };
+    case 'showSuccessModal':
+      return { ...state, showSuccessModal: true };
+    case 'closeModal':
+      return { ...state, showSuccessModal: false };
+    case 'resetForm':
+      return { ...initialState, showSuccessModal: false };
   }
 };
 
+const initialState: State = {
+  name: '',
+  country: {
+    __typename: 'country',
+    name: 'United States',
+    id: 'us',
+    flagUrl: 'https://flagcdn.com/us.svg',
+    independent: true,
+    unMember: true,
+    region: 'Americas',
+    capital: 'Washington',
+    subregion: 'North America',
+  },
+  discount: 0,
+  showSuccessModal: false,
+};
+
 export const FormDataProvider = ({ children }: { children: ReactNode }) => {
-  const [state, dispatch] = useReducer(reducer, {} as State);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const api = useMemo(() => {
+    const isFormValid = state.name.trim().length > 0;
+
     const onSave = () => {
-      // send the request to the backend here
+      if (!isFormValid) {
+        return;
+      }
+      // TODO: send the request to the backend here
+      // Example: await saveUserData(state);
+      dispatch({ type: 'showSuccessModal' });
+    };
+
+    const onReset = () => {
+      dispatch({ type: 'resetForm' });
+    };
+
+    const onCloseModal = () => {
+      dispatch({ type: 'closeModal' });
     };
 
     const onDiscountChange = (discount: number) => {
@@ -55,8 +101,17 @@ export const FormDataProvider = ({ children }: { children: ReactNode }) => {
       dispatch({ type: 'updateCountry', country });
     };
 
-    return { onSave, onDiscountChange, onNameChange, onCountryChange };
-  }, []);
+    return {
+      onSave,
+      onReset,
+      onCloseModal,
+      onDiscountChange,
+      onNameChange,
+      onCountryChange,
+      isFormValid,
+      showSuccessModal: state.showSuccessModal,
+    };
+  }, [state]);
 
   return (
     <FormAPIContext.Provider value={api}>

@@ -5,9 +5,14 @@ export const DiscountFormComponent = () => {
   const { onDiscountChange } = useFormAPI();
 
   return (
-    <div>
-      Please select your discount here: <br />
-      <DraggingBar onChange={(value: number) => onDiscountChange(value)} />
+    <div className="space-y-3">
+      <DraggingBar
+        onChange={(value: number) => onDiscountChange(value)}
+        max={300}
+        min={0}
+        step={5}
+        label="Discount Amount"
+      />
     </div>
   );
 };

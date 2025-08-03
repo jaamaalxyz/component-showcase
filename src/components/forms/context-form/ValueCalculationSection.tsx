@@ -3,7 +3,7 @@ import { Section } from './Section';
 
 export const ValueCalculationsSection = () => {
   return (
-    <Section title="Value calculation">
+    <Section title="Discount Settings" description="Adjust your discount preferences">
       <DiscountFormComponent />
     </Section>
   );

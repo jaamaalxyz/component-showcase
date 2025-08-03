@@ -5,7 +5,7 @@ import { SelectCountryFormComponent } from './SelectCountryFormComponent';
 
 export function PersonalInfoSection() {
   return (
-    <Section title="Personal information">
+    <Section title="Personal Information" description="Please provide your basic information">
       <DiscountSituation />
       <NameFormComponent />
       <SelectCountryFormComponent />
