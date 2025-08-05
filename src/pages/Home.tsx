@@ -51,6 +51,20 @@ export function Home() {
             View Context Form Examples →
           </Link>
         </div>
+
+        <div className="bg-white rounded-lg shadow-sm border p-6">
+          <h2 className="text-xl font-semibold mb-3">Authentication Form</h2>
+          <p className="text-gray-600 mb-4">
+            A comprehensive authentication form with advanced validation, password strength
+            indicators, and accessibility features for login and signup flows.
+          </p>
+          <Link
+            to="/auth-form"
+            className="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium"
+          >
+            View Auth Form Examples →
+          </Link>
+        </div>
       </div>
     </div>
   );
