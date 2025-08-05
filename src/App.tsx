@@ -4,6 +4,7 @@ import { Home } from './pages/Home';
 import { ButtonPage } from './pages/ButtonPage';
 import { AccordionPage } from './pages/AccordionPage';
 import { ContextFormPage } from './pages/ContextFormPage';
+import { AuthFormPage } from './pages/AuthFormPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="button" element={<ButtonPage />} />
         <Route path="accordion" element={<AccordionPage />} />
         <Route path="context-form" element={<ContextFormPage />} />
+        <Route path="auth-form" element={<AuthFormPage />} />
       </Route>
     </Routes>
   );
