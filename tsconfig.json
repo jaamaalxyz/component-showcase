@@ -42,5 +42,5 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
   },
-  "include": ["src"]
+  "include": ["src", "__test__/Accordion.test.tsx", "__test__/Button.test.tsx"]
 }

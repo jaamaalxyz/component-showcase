@@ -2,7 +2,12 @@ import { describe, it, expect, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { render, screen, waitFor } from '@/test/utils';
 import { axeTest } from '@/test/utils';
-import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '../Accordion';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+  AccordionContent,
+} from '../src/components/ui/Accordion';
 
 describe('Accordion Component', () => {
   const TestAccordion = ({

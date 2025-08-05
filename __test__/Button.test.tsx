@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@/test/utils';
 import { axeTest } from '@/test/utils';
-import { Button } from '../Button';
+import { Button } from '../src/components/ui/Button';
 
 describe('Button Component', () => {
   describe('Rendering', () => {
